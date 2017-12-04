@@ -2,7 +2,7 @@
 
 Understand (and speak) any bot language, instantly!
 
-### Minimal example [(Serverless)](https://serverless.com)
+### Minimal example (aws lambda)
 ```js
 
 const BabelBot = require('babelbot')
