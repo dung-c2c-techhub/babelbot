@@ -1,0 +1,13 @@
+{
+  "messages": [{
+    "chatId": "CHAT_ID",
+    "id": "MESSAGE_ID",
+    "type": "picture",
+    "from": "yonah_forst",
+    "participants": ["tonah_forst"],
+    "picUrl": "http://kik.com/image.png",
+    "timestamp": 1439576628405,
+    "readReceiptRequested": true,
+    "mention": null
+  }]
+}
