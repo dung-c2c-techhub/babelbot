@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = require('../../lib/fetch')
 const baseUrl = 'https://api.kik.com'
 
 module.exports = ({ username, apiKey }) => path => body => {
@@ -12,5 +12,4 @@ module.exports = ({ username, apiKey }) => path => body => {
 	    'Content-Type': 'application/json',
 	  },
 	})
-	.then(res => res.json())
 }

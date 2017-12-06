@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = require('../../lib/fetch')
 const baseUrl = 'https://skype.botframework.com'
 
 module.exports = token => path => body => {
@@ -10,5 +10,4 @@ module.exports = token => path => body => {
 	    'Content-Type': 'application/json; charset=utf-8',
 	  },
 	})
-	.then(res => res.json())
 }

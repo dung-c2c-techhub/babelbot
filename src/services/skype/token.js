@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = require('../../lib/fetch')
 const qs = require('querystring')
 
 const CACHE = {}
@@ -34,7 +34,6 @@ module.exports = ({ appId,  appPassword }) => {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     })
-    .then(res => res.json())
     .then(({ access_token, expires_in }) => {
       setCache(appId, access_token, expires_in * 10)
 

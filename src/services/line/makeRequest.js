@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = require('../../lib/fetch')
 const baseUrl = 'https://api.line.me'
 
 module.exports = ({ channelAccessToken }) => path => body => {
@@ -11,5 +11,4 @@ module.exports = ({ channelAccessToken }) => path => body => {
 	    'Content-Type': 'application/json',
 	  },
 	})
-	.then(res => res.json())
 }

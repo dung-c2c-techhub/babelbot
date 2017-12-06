@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = require('../../lib/fetch')
 const qs = require('querystring')
 
 const baseUrl = 'https://api.twilio.com'
@@ -15,5 +15,4 @@ module.exports = ({ apiKeySid, apiKeySecret, accountSid }) => path => body => {
       'Content-Type': 'application/x-www-form-urlencoded',
 	  },
 	})
-	.then(res => res.json())
 }
