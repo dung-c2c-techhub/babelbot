@@ -10,7 +10,9 @@ const credentials = {
 test('makes request', assert => {
   telegramNock.get('/bottoken123/getFile?file_id=file123')
 	  .reply(200, {
-	    file_path: 'filepath456'
+	    result: {
+	    	file_path: 'filepath456',
+	    },
 	  })
 
 	var expected = 'https://api.telegram.org/file/bottoken123/filepath456'
