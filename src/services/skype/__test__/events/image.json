@@ -5,7 +5,7 @@
   "type": "message",
   "timestamp": "2015-08-14T18:23:48.405Z",
   "attachments": [{
-    "contentType": [ "image" ],
+    "contentType": "image",
     "contentUrl": "http://skype.com/image.png"
   }]
 }

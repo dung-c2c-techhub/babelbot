@@ -8,13 +8,13 @@ test('should format a single text message', assert => {
   }
 
   const expected = {
-    to: 'yonah_forst',
-    messages: [{
-      text: 'Hello abi',
-      type: 'text'
-    }]
+    recipient: {
+      id: 'yonah_forst'
+    },
+    text: 'Hello abi',
+    type: 'message',
   }
-  
+
   assert.plan(1)
   assert.deepEqual(format.message(msg), expected)
 })
@@ -22,12 +22,18 @@ test('should format a single text message', assert => {
 
 test('should format a conversation request', assert => {
   const config = {
-    botId: 'foo',
-    botName: 'bar',
+    bot: {
+      id: 'foo',
+      name: 'bar',
+    }
   }
+
   const msg = {
-    service_user_id: 'yonah_forst',
+    recipient: {
+      id: 'yonah_forst'
+    },
     text: 'Hello abi',
+    type: 'message',
   }
 
   const expected = {
@@ -39,7 +45,7 @@ test('should format a conversation request', assert => {
       id: 'yonah_forst',
     }],
   }
-  
+
   assert.plan(1)
   assert.deepEqual(format.conversation(config)(msg), expected)
 })

@@ -24,7 +24,7 @@ module.exports = ({ appId,  appPassword }) => {
     grant_type: 'client_credentials',
     client_id: appId,
     client_secret: appPassword,
-    scope: 'https://graph.microsoft.com/.default',
+    scope: 'https://api.botframework.com/.default',
   }
 
   return fetch(url, {

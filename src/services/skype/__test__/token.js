@@ -9,10 +9,10 @@ test('token', assert => {
     grant_type: 'client_credentials',
     client_id: 'foo',
     client_secret: 'bar',
-    scope: 'https://graph.microsoft.com/.default',
+    scope: 'https://api.botframework.com/.default',
   })
   .reply(200, {
-    access_token: 'fooToken', 
+    access_token: 'fooToken',
     expires_in: 100,
   })
 

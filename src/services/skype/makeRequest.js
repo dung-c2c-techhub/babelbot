@@ -6,7 +6,7 @@ module.exports = token => path => body => {
 		body: JSON.stringify(body),
 		method: 'POST',
 	  headers: {
-	    Authorization: `Basic ${token}`,
+	    Authorization: `Bearer ${token}`,
 	    'Content-Type': 'application/json; charset=utf-8',
 	  },
 	})

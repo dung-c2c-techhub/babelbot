@@ -11,11 +11,12 @@ const pflow = function () {
 }
 
 module.exports = config => {
-	const makeRequestAuth = path => getToken(config)
-		.then(token => makeRequest(token)(path))
+
+	const makeRequestAuth = path => obj => getToken(config)
+		.then(token => makeRequest(token)(path)(obj))
 
   const getConversationPath = pflow(
-  	format.conversation(config), 
+  	format.conversation(config),
   	makeRequestAuth('/v3/conversations'),
   	({ id }) => `/v3/conversations/${id}/activities`
   )
@@ -27,7 +28,7 @@ module.exports = config => {
 	const sendFunc = flow(format.message, sendMessage)
 
 	return {
-		parse: parse,
+		parse: parse(config),
 		send: chunker(sendFunc)
 	}
 }

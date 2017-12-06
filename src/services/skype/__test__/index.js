@@ -4,7 +4,7 @@ const proxyquire = require('proxyquire')
 const index = proxyquire('../index', {
   '../../lib/chunker': f => payload => f(payload),
   './makeRequest': token => path => body => Promise.resolve({ path, body, token }),
-  './parse': parsed => ({ parsed }),
+  './parse': config => parsed => ({ parsed }),
   './format': {
     conversation: formatted => ({ formatted}),
     message: formatted => ({ formatted }),
