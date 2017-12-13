@@ -5,5 +5,6 @@ module.exports = {
   skype: require('./skype'),
   telegram: require('./telegram'),
   twilio: require('./twilio'),
+  loopback: require('./loopback'),
   // wechat: require('./wechat')
 }
