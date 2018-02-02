@@ -6,7 +6,11 @@ const BabelBot = proxyquire('../index', {
 		foo: config => ({
 			send: payload => Promise.resolve({ payload, config }),
 			parse: payload => Promise.resolve({ payload, config }),
-		})
+		}),
+		loopback: config => ({
+			send: payload => Promise.resolve({ payload, config }),
+			parse: payload => Promise.resolve({ payload, config }),
+		}),
 	}
 })
 
@@ -44,6 +48,21 @@ test('parse - missing config', assert => {
 		.catch(e => assert.equals(e, 'config missing for foo'))
 })
 
+test('parse - loopback missing config', assert => {
+	var service = new BabelBot({})
+
+	var payload = {
+		bar: 'baz',
+	}
+	var expected = {
+		payload,
+		config: null,
+	}
+
+	return service.parse('loopback', payload)
+		.then(res => assert.deepEquals(res, expected, 'sends to loopback parser'))
+})
+
 test('send', assert => {
 	var config = { foo: 'bar' }
 	var service = new BabelBot(config)
@@ -78,3 +97,21 @@ test('send - missing config', assert => {
 		.then(assert.fail)
 		.catch(e => assert.equals(e, 'config missing for foo'))
 })
+
+test('send - loopback missing config', assert => {
+	var service = new BabelBot({})
+
+	var payload = {
+		bar: 'baz',
+	}
+
+	var expected = {
+		payload,
+		config: null,
+	}
+
+	return service.send('loopback', payload)
+		.then(res => assert.deepEquals(res, expected, 'sends to loopback sender'))
+})
+
+

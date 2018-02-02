@@ -10,7 +10,7 @@ class BabelBot {
 		if (!service) return Promise.reject('unknown service ' + serviceName)
 
 		var config = this.getConfig(serviceName)
-		if (!config) return Promise.reject('config missing for ' + serviceName)
+		if (!config && serviceName !== 'loopback') return Promise.reject('config missing for ' + serviceName)
 
 		return service(config).parse(payload)
 	}
@@ -20,7 +20,7 @@ class BabelBot {
 		if (!service) return Promise.reject('unknown service ' + serviceName)
 
 		var config = this.getConfig(serviceName)
-		if (!config) return Promise.reject('config missing for ' + serviceName)
+		if (!config && serviceName !== 'loopback') return Promise.reject('config missing for ' + serviceName)
 
 		return service(config).send(payload)
 

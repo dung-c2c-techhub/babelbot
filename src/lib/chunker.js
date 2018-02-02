@@ -7,7 +7,6 @@ module.exports = _send => payload => {
   if (!text) return _send(payload)
 
   let payloads = _chunk(text, 300).map(text => Object.assign({}, payload, { text }))
-
   let boundSendFunc = _send.bind(null)
 
   return _chainPromiseWithArguments(boundSendFunc, payloads, calcuatePauseForText)
