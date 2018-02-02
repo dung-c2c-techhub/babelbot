@@ -52,10 +52,18 @@ test('should parse multiple messages', t => {
     .then(response => t.deepEqual(response, expected))
 })
 
-test('should ignore non text messages', t => {
-  const other = require('./events/messenger_other.json')
-  const expected = []
 
-  return parse(other)
+test('should parse a postback', t => {
+  const msg = require('./events/messenger_postback.json')
+  const expected = [{
+    service_name: 'messenger',
+    service_user_id: 'yonah_forst',
+    timestamp: 1439576628405,
+    meta: {
+      ref: 'c1234567',
+    },
+  }]
+
+  return parse(msg)
     .then(response => t.deepEqual(response, expected))
 })

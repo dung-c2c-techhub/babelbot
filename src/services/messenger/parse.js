@@ -2,21 +2,18 @@ const SERVICE_NAME = 'messenger'
 const VALID_TYPES = [ 'image', 'audio' ]
 
 module.exports = ({ entry }) => {
-  var messages = entry.reduce((p, c) => p.concat(c.messaging || []), [])
-  var res = filter(messages).map(format)
-
-  return Promise.resolve(res)
-}
-
-function filter(messages) {
-  return messages.filter(m => m.message && !m.message.is_echo)
+  var messages = entry
+    .reduce((p, c) => p.concat(c.messaging || []), [])
+    .map(format)
+  
+  return Promise.resolve(messages)
 }
 
 function filterAttachments(attachments) {
   return attachments.filter(a => VALID_TYPES.includes(a.type))
 }
 
-function format({ sender, message, timestamp }) {
+function format({ sender={}, message={}, postback={}, timestamp, referral }) {
   var { id } = sender
   var { text, attachments } = message
 
@@ -32,6 +29,10 @@ function format({ sender, message, timestamp }) {
     msg.attachments = filterAttachments(attachments)
       .map(a => ({ url: a.payload.url }))
   }
+
+  var meta = referral || postback.referral
+  
+  if (meta) msg.meta = meta
 
   return msg
 }

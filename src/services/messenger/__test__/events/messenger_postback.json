@@ -1,0 +1,25 @@
+{
+  "object":"page",
+  "entry":[
+    {
+      "id":"PAGE_ID",
+      "time":1439576628405,
+      "messaging":[
+        {
+          "sender":{
+            "id":"yonah_forst"
+          },
+          "recipient":{
+            "id":"PAGE_ID"
+          },
+          "timestamp":1439576628405,
+          "postback":{
+            "referral": {
+              "ref": "c1234567"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
