@@ -2,9 +2,9 @@ const test = require('tap').test
 const proxyquire = require('proxyquire')
 
 const index = proxyquire('../index', {
-  './makeRequest': config => path => body => Promise.resolve({ path, body, config }),
+  './makeRequest': config => body => Promise.resolve({ body, config }),
   './parse': parsed => ({ parsed }),
-  './format': formatted => ({ formatted }),
+  './format': config => formatted => ({ formatted }),
   '../../lib/chunker': func => payload => func(payload),
 })
 
@@ -12,8 +12,8 @@ test('send', assert => {
 
   var config = { 
     bar: 'baz',
-    targetUrl: '/some/target',
   }
+
   var msg = {
     service_user_id: 'morty',
     text: 'wubalubadubdub!',
@@ -21,7 +21,6 @@ test('send', assert => {
 
   var expected = {
     config,
-    path: '/some/target',
     body: {
       formatted: msg,
     }

@@ -11,7 +11,8 @@ const oxygen8Nock = nock('https://relay.uk.oxygen8.com', {
 
 const credentials = {
 	username: 'foo',
-	password: 'bar'
+	password: 'bar',
+	targetUrl: '/foo',
 }
 
 test('makes request', t => {
@@ -22,6 +23,6 @@ test('makes request', t => {
     status: 'ok'
   })
 
-  return makeRequest(credentials)('/foo')({ bar: 'baz' })
+  return makeRequest(credentials)({ bar: 'baz' })
     .then(res => t.deepEquals(res, { status: 'ok' }, 'makes request'))
 })

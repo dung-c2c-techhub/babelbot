@@ -5,8 +5,7 @@ const makeRequest = require('./makeRequest')
 const flow = require('lodash.flow')
 
 module.exports = config => {
-	const { targetUrl } = config
-	const sendFunc = flow(format, makeRequest(config)(targetUrl))
+	const sendFunc = flow(format(config), makeRequest(config))
 
 	return {
 		parse,
