@@ -30,9 +30,9 @@ function format({ sender={}, message={}, postback={}, timestamp, referral }) {
       .map(a => ({ url: a.payload.url }))
   }
 
-  var meta = referral || postback.referral
+  var referral = referral || postback.referral
   
-  if (meta) msg.meta = meta
+  if (referral) msg.referral = referral.ref
 
   return msg
 }

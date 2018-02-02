@@ -59,9 +59,7 @@ test('should parse a postback', t => {
     service_name: 'messenger',
     service_user_id: 'yonah_forst',
     timestamp: 1439576628405,
-    meta: {
-      ref: 'c1234567',
-    },
+    referral: 'c1234567',
   }]
 
   return parse(msg)
