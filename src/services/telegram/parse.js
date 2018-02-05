@@ -13,8 +13,14 @@ module.exports = config => ({ message }) => {
     service_user_id: from.id.toString(),
     timestamp: date * 1000,
   }
-
-  if (text) msg.text = text
+  
+  if (text) {
+    if (text.startsWith('/start')) {
+      msg.referral = text.split(' ')[1]
+    } else {
+      msg.text = text
+    }
+  }
 
   if (Array.isArray(photo)) {
     var { file_id } = photo.sort(byFileSize)[0]
