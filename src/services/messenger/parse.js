@@ -5,7 +5,7 @@ module.exports = ({ entry }) => {
   var messages = entry
     .reduce((p, c) => p.concat(c.messaging || []), [])
     .map(format)
-    .filter(m => m.referral || m.text)
+    .filter(m => m.referral || m.text || m.attachments)
   
   return Promise.resolve(messages)
 }
