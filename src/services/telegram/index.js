@@ -10,6 +10,6 @@ module.exports = config => {
 
 	return {
 		parse: parse(config),
-		send: chunker(sendFunc)
+		send: chunker(sendFunc, config)
 	}
 }

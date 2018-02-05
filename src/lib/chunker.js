@@ -1,21 +1,29 @@
 let MIN_PAUSE_BETWEEN_MESSAGES = 1500
 let MAX_PAUSE_BETWEEN_MESSAGES = 6000
 let VARIABLE_PAUSE = 2000
+let DEFAULT_CHUNK_SIZE = 300
 
-module.exports = _send => payload => {
-  let { text } = payload
-  if (!text) return _send(payload)
+const arrayify = obj => Array.isArray(obj) ? obj : [ obj ] 
 
-  let payloads = _chunk(text, 300).map(text => Object.assign({}, payload, { text }))
-  let boundSendFunc = _send.bind(null)
+module.exports = (_send, options={}) => {
+  _send = _send.bind(null)
+  const { chunkSize=DEFAULT_CHUNK_SIZE } = options
+  const pauseFunc = chunkSize > 0
+    ? calcuatePauseForText
+    : () => 0
 
-  return _chainPromiseWithArguments(boundSendFunc, payloads, calcuatePauseForText)
+  return payload => {
+    const { text } = payload
+
+    if (!text) return _send(payload)
+    const payloads = _chunk(text, chunkSize).map(text => Object.assign({}, payload, { text }))
+
+    return _chainPromiseWithArguments(_send, payloads, pauseFunc)
+  }
 }
 
 function makeParagraphs (string, maxLength, terminators) {
-  if (!Array.isArray(terminators)) {
-    terminators = [terminators]
-  }
+  let terminatorArray = arrayify(terminators)
 
   let paragraphs = []
   let startIndex = 0
@@ -26,7 +34,7 @@ function makeParagraphs (string, maxLength, terminators) {
     let char = string[i]
     lastBreakIndex = char.match(/\s/) ? i : lastBreakIndex
 
-    if (terminators.indexOf(char) !== -1) {
+    if (terminatorArray.indexOf(char) !== -1) {
       lastTerminatorIndex = i
     }
 
@@ -72,7 +80,7 @@ function _chainPromiseWithArguments (_promise, argArray, _pauseFunc) {
 function _chunk (message, size) {
   if (Array.isArray(message)) {
     return message.reduce((pre, cur) => pre.concat(_chunk(cur, size)), [])
-  } else if (typeof message === 'string' && message.length > size) {
+  } else if (typeof message === 'string' && size > 0 && message.length > size) {
     return makeParagraphs(message, size, ['.', ':', ','])
   } else {
     return [ message ]
