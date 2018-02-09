@@ -16,7 +16,7 @@ function filterAttachments(attachments) {
 
 function format({ sender={}, message={}, postback={}, timestamp, referral }) {
   var { id } = sender
-  var { text, attachments } = message
+  var { text, attachments, isEcho } = message
 
   var msg = {
     timestamp,
@@ -24,7 +24,7 @@ function format({ sender={}, message={}, postback={}, timestamp, referral }) {
     service_user_id: id,
   }
 
-  if (text) msg.text = text
+  if (text && !isEcho) msg.text = text
 
   if (attachments) {
     msg.attachments = filterAttachments(attachments)

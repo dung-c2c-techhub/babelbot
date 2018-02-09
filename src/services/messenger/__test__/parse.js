@@ -31,7 +31,7 @@ test('should parse a single picture message', t => {
     .then(response => t.deepEqual(response, expected))
 })
 
-test('should parse multiple messages', t => {
+test('should parse multiple messages, and ignore echo', t => {
   const msg = require('./events/messenger_multiple.json')
   const expected = [
     {
