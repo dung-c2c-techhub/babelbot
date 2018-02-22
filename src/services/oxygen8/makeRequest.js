@@ -13,7 +13,4 @@ module.exports = ({ username, password, targetUrl }) => body => {
       'Content-Type': 'application/x-www-form-urlencoded',
 	  },
 	})
-	.catch(error => {
-		throw new Error(error)
-	})
 }

@@ -11,9 +11,5 @@ module.exports = ({ username, apiKey }) => path => body => {
 	    Authorization: `Basic ${token}`,
 	    'Content-Type': 'application/json',
 	  },
-	})	
-	.catch(error => {
-		var parsed = JSON.parse(error)
-		throw new Error(parsed.error)
 	})
 }

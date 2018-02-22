@@ -9,8 +9,4 @@ module.exports = ({ token }) => path => body => {
 	    'Content-Type': 'application/json',
 	  },
 	})
-	.catch(error => {
-		var parsed = JSON.parse(error)
-		throw new Error(parsed.description)
-	})
 }

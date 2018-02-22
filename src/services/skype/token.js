@@ -39,8 +39,4 @@ module.exports = ({ appId,  appPassword }) => {
 
       return access_token
     })
-    .catch(error => {
-      var parsed = JSON.parse(error)
-      throw new Error(parsed.error_description)
-    })
 }
