@@ -5,7 +5,7 @@ const makeRequest = require('../makeRequest')
 const oxygen8Nock = nock('https://relay.uk.oxygen8.com', {
   reqheaders: {
   	'content-type': 'application/x-www-form-urlencoded',
-  	'authorization': 'Basic Zm9vOnVuZGVmaW5lZA==',
+  	'authorization': 'Basic Zm9vOmJhcg==',
   }
 })
 
