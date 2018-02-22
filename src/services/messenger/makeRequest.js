@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = require('../../lib/fetch')
 const qs = require('querystring')
 const baseUrl = 'https://graph.facebook.com'
 
@@ -12,5 +12,8 @@ module.exports = ({ pageAccessToken }) => path => body => {
 	    'Content-Type': 'application/json',
 	  },
 	})
-	.then(res => res.json())
+	.catch(error => {
+		var parsed = JSON.parse(error)
+		throw new Error(parsed.error.message)
+	})
 }

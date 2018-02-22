@@ -7,9 +7,7 @@ module.exports = (url, options) => {
 	  		return res.json()
 	  	} else {
 	  		return res.text()
-	  			.then(res => {
-	  				throw new Error(res)
-	  			})
+	  			.then(res => { throw res })
 	  	}
 	  })
 }

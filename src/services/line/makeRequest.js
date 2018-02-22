@@ -10,4 +10,8 @@ module.exports = ({ channelAccessToken }) => path => body => {
 	    'Content-Type': 'application/json',
 	  },
 	})
+	.catch(error => {
+		var parsed = JSON.parse(error)
+		throw new Error(parsed.message)
+	})
 }

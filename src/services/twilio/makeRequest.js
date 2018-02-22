@@ -15,4 +15,8 @@ module.exports = ({ apiKeySid, apiKeySecret, accountSid }) => path => body => {
       'Content-Type': 'application/x-www-form-urlencoded',
 	  },
 	})
+	.catch(error => {
+		var parsed = JSON.parse(error)
+		throw new Error(parsed.message)
+	})
 }
