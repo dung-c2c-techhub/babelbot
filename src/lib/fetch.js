@@ -1,6 +1,16 @@
 const fetch = require('node-fetch')
 
-const parse = res => res.json().catch(e => res.text())
+const parse = res => {
+	return res.text()
+		.then(text => {
+			try {
+				return JSON.parse(text)
+			} catch (e) {
+				return text
+			}
+		})
+}
+
 
 module.exports = (url, options) => {
 	return fetch(url, options)

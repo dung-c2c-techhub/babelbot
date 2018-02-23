@@ -12,5 +12,4 @@ module.exports = ({ pageAccessToken }) => path => body => {
 	    'Content-Type': 'application/json',
 	  },
 	})
-	.catch(e => { throw e.error })
 }
