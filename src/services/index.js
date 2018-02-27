@@ -7,5 +7,6 @@ module.exports = {
   twilio: require('./twilio'),
   oxygen8: require('./oxygen8'),
   loopback: require('./loopback'),
+  chatfire: require('./chatfire'),
   // wechat: require('./wechat')
 }

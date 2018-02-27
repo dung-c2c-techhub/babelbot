@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jsonwebtoken": "^8.1.1",
     "lodash.flow": "^3.5.0",
     "node-fetch": "^1.7.3"
   }
