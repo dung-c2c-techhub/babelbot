@@ -9,7 +9,7 @@ function getCache(partnerUserId) {
   if (!token) 
     return
 
-  var { exp } = jwt.decode(token, { complete: true })
+  var { exp } = jwt.decode(token)
   if (exp && exp <= Date.now())
     return
 
@@ -20,11 +20,9 @@ function setCache(partnerUserId, token) {
   CACHE[partnerUserId] = token
 }
 
-module.exports = ({ privateKey, authUrl, partnerUserId, partnerName }) => {
+module.exports = ({ token, authUrl, partnerUserId }) => {
   var cached = getCache(partnerUserId)
   if (cached) return Promise.resolve(cached)
-
-  var token = jwt.sign({ partnerUserId }, privateKey, { issuer: partnerName })
   
   return fetch(authUrl + '?' + qs.stringify({ token }))
     .then(({ token }) => {
