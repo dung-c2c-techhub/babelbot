@@ -5,7 +5,7 @@ const index = proxyquire('../index', {
   '../../lib/chunker': f => payload => f(payload),
   './makeRequest': token => url => body => Promise.resolve({ body, url, token }),
   './parse': parsed => ({ parsed }),
-  './format': formatted => ({ formatted, userId: '12345' }),
+  './format': formatted => ({ formatted, userId: '12345', at: 67890 }),
   './token': () => Promise.resolve('foobar'),
 })
 
@@ -19,7 +19,7 @@ test('send', assert => {
 
   var expected = {
     token: 'foobar',
-    url: /https:\/\/bar.baz\/foo\/12345\/\d+/,
+    url: 'https://bar.baz/foo/12345/67890',
     body: {
       formatted: msg,
     }

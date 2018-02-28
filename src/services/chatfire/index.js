@@ -13,7 +13,7 @@ module.exports = config => {
 		.then(token => makeRequest(token)(path)(obj))
 
 	const sendMessage = msg => {
-		const path = [ databaseUrl, msg.userId, Date.now() ].join('/')
+		const path = [ databaseUrl, msg.userId, msg.at ].join('/')
 		return getToken(config)
 			.then(token => makeRequest(token)(path)(msg))
 	}
