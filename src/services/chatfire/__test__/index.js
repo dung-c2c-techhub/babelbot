@@ -3,14 +3,13 @@ const proxyquire = require('proxyquire')
 
 const index = proxyquire('../index', {
   '../../lib/chunker': f => payload => f(payload),
-  './makeRequest': token => url => body => Promise.resolve({ body, url, token }),
+  './makeRequest': token => path => body => Promise.resolve({ body, path, token }),
   './parse': parsed => ({ parsed }),
-  './format': formatted => ({ formatted, userId: '12345', at: 67890 }),
+  './format': config => formatted => ({ formatted, userId: '12345', at: 67890 }),
   './token': () => Promise.resolve('foobar'),
 })
 
 test('send', assert => {
-  var config = { databaseUrl: 'https://bar.baz/foo' }
 
   var msg = {
     service_user_id: 'morty',
@@ -19,11 +18,13 @@ test('send', assert => {
 
   var expected = {
     token: 'foobar',
-    url: 'https://bar.baz/foo/12345/67890',
+    path: /\/messages\/morty\/\d+/,
     body: {
       formatted: msg,
     }
   }
+
+  const config = {}
 
   return index(config).send(msg)
     .then(res => assert.match(res, expected, 'formats and sends'))

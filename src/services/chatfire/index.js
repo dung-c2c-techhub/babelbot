@@ -4,21 +4,22 @@ const parse = require('./parse')
 const format = require('./format')
 const makeRequest = require('./makeRequest')
 const getToken = require('./token')
-const flow = require('lodash.flow')
 
 module.exports = config => {
-	const { databaseUrl } = config
-	
-	const makeRequestAuth = url => obj => getToken(config)
+	const formatter = format(config)
+
+	const getPath = msg => `/messages/${msg.service_user_id}/${Date.now()}.json`
+
+	const makeRequestAuth = path => obj => getToken(config)
 		.then(token => makeRequest(token)(path)(obj))
 
-	const sendMessage = msg => {
-		const path = [ databaseUrl, msg.userId, msg.at ].join('/')
-		return getToken(config)
-			.then(token => makeRequest(token)(path)(msg))
+	const sendFunc = msg => {
+		const path = getPath(msg)
+	 	const formatted = formatter(msg)
+	 	const sendMessage = makeRequestAuth(path)
+	 	
+	 	return sendMessage(formatted)
 	}
-
-	const sendFunc = flow(format, sendMessage)
 
 	return {
 		parse,

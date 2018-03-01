@@ -1,12 +1,11 @@
 const fetch = require('../../lib/fetch')
 
-module.exports = token => url => body => {
-	return fetch(url, {
+module.exports = ({ access_token, project_id }) => path => body => {
+	return fetch(`https://${project_id}.firebaseio.com` + path, {
 		body: JSON.stringify(body),
-		method: 'POST',
+		method: 'PUT',
 	  headers: {
-	    Authorization: `Bearer ${token}`,
-	    'Content-Type': 'application/json',
+	    Authorization: `Bearer ${access_token}`,
 	  },
 	})
 }

@@ -1,6 +1,7 @@
-module.exports = ({ service_user_id, text }) => {
+module.exports = ({ bot_id }) => ({ text }) => {
 	return {
-		userId: service_user_id,
+		isBot: true,
+		userId: bot_id,
 		body: text,
 		at: Date.now(),
 	}

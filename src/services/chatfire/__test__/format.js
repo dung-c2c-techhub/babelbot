@@ -7,12 +7,17 @@ test('should format a single text message', assert => {
     text: 'Hello abi',
   }
 
+  const config = {
+    bot_id: 'abibot',
+  }
+
   const expected = {
-    userId: 'yonah_forst',
+    isBot: true,
+    userId: 'abibot',
     body: 'Hello abi',
     at: /\d+/,
   }
 
   assert.plan(1)
-  assert.match(format(msg), expected)
+  assert.match(format(config)(msg), expected)
 })
