@@ -14,18 +14,20 @@ module.exports = config => ({ userId, body, at, attachments }) => {
   if (attachments) {
     return getToken(config)
       .then(authToken => {
-        return Object.assign({}, msg, {
-          attachments: attachments.map(a => ({
-            url: a.url,
-            options: {
-              headers: {
-                'Authorization': `Bearer ${authToken}`,
-              },
-            },
-          }))
-        })
+        return [
+        	Object.assign({}, msg, {
+	          attachments: attachments.map(a => ({
+	            url: a.url,
+	            options: {
+	              headers: {
+	                'Authorization': `Bearer ${authToken}`,
+	              },
+	            },
+	          }))
+	        })
+	      ]
       })
   }
 
-  return Promise.resolve(msg)
+  return Promise.resolve([ msg ])
 }

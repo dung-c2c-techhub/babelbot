@@ -12,12 +12,12 @@ test('should parse a single text message', assert => {
     at: 1439576628405,
   }
 
-  const expected = {
+  const expected = [{
     service_name: 'chatfire',
     service_user_id: 'yonah_forst',
     text: 'Hello abi',
     timestamp: 1439576628405,
-  }
+  }]
 
   return parse({})(msg)
     .then(res => assert.deepEqual(res, expected, 'parses a single message'))
@@ -32,7 +32,7 @@ test('should parse a single picture message', t => {
     at: 1439576628405,
   }
 
-  const expected = {
+  const expected = [{
     service_name: 'chatfire',
     service_user_id: 'yonah_forst',
     attachments: [{
@@ -44,7 +44,7 @@ test('should parse a single picture message', t => {
       },
     }],
     timestamp: 1439576628405,
-  }
+  }]
 
   return parse({})(msg)
     .then(response => t.deepEqual(response, expected))
