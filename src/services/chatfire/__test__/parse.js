@@ -2,7 +2,7 @@ const { test } = require('tap')
 const proxyquire = require('proxyquire')
 
 const parse = proxyquire('../parse', {
-  './token': () => Promise.resolve('authToken1234')
+  './token': () => Promise.resolve({ access_token: 'authToken1234' })
 })
 
 test('should parse a single text message', assert => {

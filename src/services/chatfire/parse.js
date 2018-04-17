@@ -13,14 +13,14 @@ module.exports = config => ({ userId, body, at, attachments }) => {
 
   if (attachments) {
     return getToken(config)
-      .then(authToken => {
+      .then(({ access_token }) => {
         return [
         	Object.assign({}, msg, {
 	          attachments: attachments.map(a => ({
 	            url: a.url,
 	            options: {
 	              headers: {
-	                'Authorization': `Bearer ${authToken}`,
+	                'Authorization': `Bearer ${access_token}`,
 	              },
 	            },
 	          }))
