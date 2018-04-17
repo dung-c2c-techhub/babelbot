@@ -1,5 +1,9 @@
 
-const chunker = require('../../lib/chunker')
+const chunker = func => res => {
+	const text = Array.isArray(res.text) ? res.text.join(' ') : res.text
+	return func(Object.assign({}, res, { text }))
+}
+
 const fetch = require('../../lib/fetch')
 const service_name = 'loopback'
 

@@ -22,7 +22,7 @@ module.exports = config => {
 	}
 
 	return {
-		parse,
-		send: chunker(sendFunc)
+		parse: parse(config),
+		send: chunker(sendFunc),
 	}
 }
