@@ -10,6 +10,8 @@ module.exports.generate = config => {
 		scope: [
 	  	'https://www.googleapis.com/auth/userinfo.email',
 	  	'https://www.googleapis.com/auth/firebase.database',
+	  	'https://www.googleapis.com/auth/firebase.storage',
+	  	'https://www.googleapis.com/auth/devstorage.read_only',
 		].join(' '),
 		iat: now,
 		iss: client_email,
