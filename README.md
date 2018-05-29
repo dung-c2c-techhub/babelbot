@@ -17,9 +17,9 @@ module.exports.handler = (event, context, callback) => {
   } = event
 
   const { serviceName } = pathParameters
-  const parsed = JSON.parse(body)
+  const obj = JSON.parse(body)
 
-  return bablebot.parse(serviceName, parsed)
+  return bablebot.parse(serviceName, obj)
     .then(res => {
       res.text = "You said: " + res.text
       return bablebot.send(serviceName, res)
