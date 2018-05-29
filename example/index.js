@@ -1,5 +1,5 @@
 
-const BabelBot = require('../src')
+const BabelBot = require('babelbot')
 const config = require('./secrets.example.json')
 
 const bablebot = new BabelBot(config)
