@@ -1,35 +1,32 @@
-'use strict'
+const SERVICE_NAME = 'viber'
+const VALID_MESSAGE_TYPES = [ 'text', 'picture' ]
 
-const getAttachmentUrl = require('./getAttachmentUrl')
-const SERVICE_NAME = 'telegram'
-const byFileSize = (a, b) => b.file_size - a.file_size
+module.exports = ( message ) => {
+  var res = format(message)
 
-module.exports = config => ({ message }) => {
-  var { from, text, date, photo } = message  
-  if (!text && !photo) return Promise.resolve([])
+  return Promise.resolve(res)
+}
+
+function format({ event, timestamp, sender, message }) {
+
+  if (!VALID_MESSAGE_TYPES.includes(message.type)) return []
 
   var msg = {
+    timestamp,
     service_name: SERVICE_NAME,
-    service_user_id: from.id.toString(),
-    timestamp: date * 1000,
-  }
-  
-  if (text) {
-    if (text.startsWith('/start')) {
-      msg.referral = text.split(' ')[1]
-    } else {
-      msg.text = text
-    }
+    service_user_id: sender.id,
   }
 
-  if (Array.isArray(photo)) {
-    var { file_id } = photo.sort(byFileSize)[0]
-    return getAttachmentUrl(config)(file_id)
-      .then(url => {
-        msg.attachments = [{ url }]
-        return [ msg ]
-      })
+  if (message.type == 'text') {
+    if (message.text) msg.text = message.text
   }
 
-  return Promise.resolve([ msg ])
+  if (message.type == 'picture') {
+    msg.attachments = [{ 
+     url: message.media 
+   }]   
+ }
+
+  return [ msg ]
+
 }

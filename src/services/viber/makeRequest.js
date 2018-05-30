@@ -1,5 +1,5 @@
 const fetch = require('../../lib/fetch')
-const baseUrl = 'https://api.telegram.org/bot'
+const baseUrl = 'https://chatapi.viber.com/pa'
 
 module.exports = ({ token }) => path => body => {
 	return fetch(baseUrl + token + path, {

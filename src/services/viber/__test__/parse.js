@@ -2,47 +2,36 @@
 
 const { test } = require('tap')
 const proxyquire = require('proxyquire')
-const parse = proxyquire('../parse', {
-  './getAttachmentUrl': config => file_id => Promise.resolve('https://attachment.com/' + file_id)
-})
+const parse = require('../parse')
 
 const config = {
   token: 'foobar',
 }
 
 test('should parse a single text message', t => {
-  const msg = require('./events/single.json')
+  const msg = require('./events/viber_message.json')
   const expected = [{
-    service_name: 'telegram',
-    service_user_id: 'yonah_forst',
+    service_name: 'viber',
+    service_user_id: '01234567890A=',
     text: 'Hello abi',
-    timestamp: 1439576628000,
+    timestamp: 1457764197627,
   }]
 
-  return parse({})(msg)
+  return parse(msg)
     .then(response => t.deepEqual(response, expected))
 })
 
 test('should parse a single picture message', t => {
-  const msg = require('./events/image.json')
+  const msg = require('./events/viber_image.json')
   const expected = [{
-    service_name: 'telegram',
-    service_user_id: 'yonah_forst',
+    service_name: 'viber',
+    service_user_id: '01234567890A=',
     attachments: [{ 
-      url: 'https://attachment.com/789',
+      url: 'http://viber.com/image.png',
     }],
-    timestamp: 1439576628000,
+    timestamp: 1439576628405,
   }]
 
-  return parse(config)(msg)
-    .then(response => t.deepEqual(response, expected))
-})
-
-
-test('should ignore non text messages', t => {
-  const msg = require('./events/other.json')
-  const expected = []
-
-  return parse({})(msg)
+  return parse(msg)
     .then(response => t.deepEqual(response, expected))
 })
