@@ -1,6 +1,10 @@
 module.exports = ({ service_user_id, text, options={} }) => {
 	return Object.assign({}, options, {
-    chat_id: service_user_id,
-    text: text,
+        receiver: service_user_id,
+        type: 'text',
+        text: text,
+        sender: {
+            name: 'Abi'
+        }
 	})
 }

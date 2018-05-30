@@ -9,7 +9,7 @@ module.exports = ( message ) => {
 
 function format({ event, timestamp, sender, message }) {
 
-  if (!VALID_MESSAGE_TYPES.includes(message.type)) return []
+  if (!message || !VALID_MESSAGE_TYPES.includes(message.type)) return []
 
   var msg = {
     timestamp,
