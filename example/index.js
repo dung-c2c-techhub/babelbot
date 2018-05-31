@@ -14,11 +14,14 @@ module.exports.handler = (event, context, callback) => {
   const parsed = JSON.parse(body)
 
   return babelbot.parse(serviceName, parsed)
-    .then(res => {
+    .then(([ res ]) => {
+      if (!res) return
       res.text = "You said: " + res.text
       return babelbot.send(serviceName, res)
     })
-    .then(() => callback(null, { statusCode: 200 }))
+    .then(res => {
+      return callback(null, { statusCode: 200 })
+    })
     .catch(callback)
 }
 
