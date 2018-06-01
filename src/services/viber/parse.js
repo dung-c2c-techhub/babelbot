@@ -23,7 +23,7 @@ function format({ event, timestamp, sender, message }) {
 
   if (message.type == 'picture') {
     msg.attachments = [{ 
-     url: message.media 
+     url: message.media
    }]   
  }
 
