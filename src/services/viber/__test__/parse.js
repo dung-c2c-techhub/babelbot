@@ -1,12 +1,7 @@
 'use strict'
 
 const { test } = require('tap')
-const proxyquire = require('proxyquire')
 const parse = require('../parse')
-
-const config = {
-  token: 'foobar',
-}
 
 test('should parse a single text message', t => {
   const msg = require('./events/viber_message.json')
@@ -14,7 +9,7 @@ test('should parse a single text message', t => {
     service_name: 'viber',
     service_user_id: '01234567890A=',
     text: 'Hello abi',
-    timestamp: 1457764197627,
+    timestamp: 1457764197627
   }]
 
   return parse(msg)
@@ -26,10 +21,10 @@ test('should parse a single picture message', t => {
   const expected = [{
     service_name: 'viber',
     service_user_id: '01234567890A=',
-    attachments: [{ 
-      url: 'http://viber.com/image.png',
+    attachments: [{
+      url: 'http://viber.com/image.png'
     }],
-    timestamp: 1439576628405,
+    timestamp: 1439576628405
   }]
 
   return parse(msg)

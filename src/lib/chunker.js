@@ -3,11 +3,11 @@ let MAX_PAUSE_BETWEEN_MESSAGES = 6000
 let VARIABLE_PAUSE = 2000
 let DEFAULT_CHUNK_SIZE = 300
 
-const arrayify = obj => Array.isArray(obj) ? obj : [ obj ] 
+const arrayify = obj => Array.isArray(obj) ? obj : [ obj ]
 
-module.exports = (_send, options={}) => {
+module.exports = (_send, options = {}) => {
   _send = _send.bind(null)
-  const { chunkSize=DEFAULT_CHUNK_SIZE } = options
+  const { chunkSize = DEFAULT_CHUNK_SIZE } = options
   const pauseFunc = chunkSize > 0
     ? calcuatePauseForText
     : () => 0

@@ -6,21 +6,20 @@ const index = proxyquire('../index', {
   './makeRequest': token => path => body => Promise.resolve({ body, path, token }),
   './parse': config => parsed => ({ parsed }),
   './format': config => formatted => ({ formatted, userId: '12345', at: 67890 }),
-  './token': () => Promise.resolve('foobar'),
+  './token': () => Promise.resolve('foobar')
 })
 
 test('send', assert => {
-
   var msg = {
     service_user_id: 'morty',
-    text: 'wubalubadubdub!',
+    text: 'wubalubadubdub!'
   }
 
   var expected = {
     token: 'foobar',
     path: /\/messages\/morty\/\d+/,
     body: {
-      formatted: msg,
+      formatted: msg
     }
   }
 
@@ -33,7 +32,7 @@ test('send', assert => {
 test('parse', assert => {
   var msg = {
     service_user_id: 'morty',
-    text: 'wubalubadubdub!',
+    text: 'wubalubadubdub!'
   }
 
   var expected = {

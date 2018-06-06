@@ -8,6 +8,6 @@ module.exports = {
   oxygen8: require('./oxygen8'),
   loopback: require('./loopback'),
   chatfire: require('./chatfire'),
-  viber: require('./viber'),
-  // wechat: require('./wechat')
+  // wechat: require('./wechat'),
+  viber: require('./viber')
 }

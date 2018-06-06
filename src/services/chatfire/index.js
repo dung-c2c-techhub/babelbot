@@ -6,23 +6,23 @@ const makeRequest = require('./makeRequest')
 const getToken = require('./token')
 
 module.exports = config => {
-	const formatter = format(config)
+  const formatter = format(config)
 
-	const getPath = msg => `/messages/${msg.service_user_id}/${Date.now()}.json`
+  const getPath = msg => `/messages/${msg.service_user_id}/${Date.now()}.json`
 
-	const makeRequestAuth = path => obj => getToken(config)
-		.then(token => makeRequest(token)(path)(obj))
+  const makeRequestAuth = path => obj => getToken(config)
+    .then(token => makeRequest(token)(path)(obj))
 
-	const sendFunc = msg => {
-		const path = getPath(msg)
-	 	const formatted = formatter(msg)
-	 	const sendMessage = makeRequestAuth(path)
-	 	
-	 	return sendMessage(formatted)
-	}
+  const sendFunc = msg => {
+    const path = getPath(msg)
+    const formatted = formatter(msg)
+    const sendMessage = makeRequestAuth(path)
 
-	return {
-		parse: parse(config),
-		send: chunker(sendFunc),
-	}
+    return sendMessage(formatted)
+  }
+
+  return {
+    parse: parse(config),
+    send: chunker(sendFunc)
+  }
 }
