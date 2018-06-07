@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "tap src/services/*/__test__/",
+    "test": "tap \"**/__test__/\"",
     "lint": "eslint . --ext .js --ignore-pattern 'node_modules'"
   },
   "author": "",

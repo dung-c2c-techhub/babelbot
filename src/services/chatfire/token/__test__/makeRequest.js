@@ -3,12 +3,11 @@ const nock = require('nock')
 const makeRequest = require('../makeRequest')
 
 test('makes request', assert => {
-  nock('https://www.googleapis.com', {
+  nock('https://www.googleapis.com/', {
     reqheaders: {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
-  }).post('/oauth2/v4/token')
-    .query({ bar: 'baz' })
+  }).post('/oauth2/v4/token', 'bar=baz')
     .reply(200, {
       status: 'ok'
     })
