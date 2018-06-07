@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/abiglobalhealth/babelbot.svg?branch=master)](https://travis-ci.org/abiglobalhealth/babelbot)
+
 # BabelBot
 
 Understand (and speak) any bot language, instantly!
