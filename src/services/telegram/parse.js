@@ -16,7 +16,9 @@ module.exports = config => ({ message }) => {
   
   if (text) {
     if (text.startsWith('/start')) {
-      msg.referral = text.split(' ')[1]
+      const [ msgText, msgReferral ] = text.split(' ')
+      msg.referral = msgReferral
+      msg.text = msgText
     } else {
       msg.text = text
     }

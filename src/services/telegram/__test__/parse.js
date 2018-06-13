@@ -23,6 +23,20 @@ test('should parse a single text message', t => {
     .then(response => t.deepEqual(response, expected))
 })
 
+test('should parse start command with referral code', t => {
+  const msg = require('./events/referral.json')
+  const expected = [{
+    service_name: 'telegram',
+    service_user_id: 'yonah_forst',
+    text: '/start',
+    referral: 'abc1234',
+    timestamp: 1439576628000,
+  }]
+
+  return parse({})(msg)
+    .then(response => t.deepEqual(response, expected))
+})
+
 test('should parse a single picture message', t => {
   const msg = require('./events/image.json')
   const expected = [{
