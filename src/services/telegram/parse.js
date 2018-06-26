@@ -4,9 +4,14 @@ const getAttachmentUrl = require('./getAttachmentUrl')
 const SERVICE_NAME = 'telegram'
 const byFileSize = (a, b) => b.file_size - a.file_size
 
-module.exports = config => ({ message }) => {
-  var { from, text, date, photo } = message  
-  if (!text && !photo) return Promise.resolve([])
+const IMAGE_MIME_TYPES = ['image/gif', 'image/jpeg', 'image/png']
+
+module.exports = config => async ({ message }) => {
+
+  var { from, text, date } = message
+  var file_id = getFileId(message)
+  // return empty if no text and no image (either in photo or document attrs)
+  if (!text && !file_id) return []
 
   var msg = {
     service_name: SERVICE_NAME,
@@ -24,14 +29,20 @@ module.exports = config => ({ message }) => {
     }
   }
 
-  if (Array.isArray(photo)) {
-    var { file_id } = photo.sort(byFileSize)[0]
-    return getAttachmentUrl(config)(file_id)
-      .then(url => {
-        msg.attachments = [{ url }]
-        return [ msg ]
-      })
+  if (file_id) {
+    var url = await getAttachmentUrl(config)(file_id)
+    msg.attachments = [{ url }]
   }
 
-  return Promise.resolve([ msg ])
+  return [ msg ]
+}
+
+
+// given a message, look for image in photo and document fields
+function getFileId( { photo = [], document = {} }) {
+  if (photo.length > 0) {
+    return photo.sort(byFileSize)[0].file_id
+  } else if (IMAGE_MIME_TYPES.includes(document.mime_type)) {
+    return document.file_id
+  }
 }
