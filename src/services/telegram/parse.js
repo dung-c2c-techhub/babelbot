@@ -7,6 +7,8 @@ const byFileSize = (a, b) => b.file_size - a.file_size
 const IMAGE_MIME_TYPES = ['image/gif', 'image/jpeg', 'image/png']
 
 module.exports = config => async ({ message }) => {
+  // return empty if not a messaage
+  if (!message) return []
 
   var { from, text, date } = message
   var file_id = getFileId(message)
