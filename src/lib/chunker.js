@@ -15,9 +15,15 @@ module.exports = (_send, options = {}) => {
   return payload => {
     const { text } = payload
 
+    
+    payloadButtons = payload.buttonConfig
+    // Delete buttons from payload to show only in last message
+    delete payload.buttonConfig
+
     if (!text) return _send(payload)
     const payloads = _chunk(text, chunkSize).map(text => Object.assign({}, payload, { text }))
 
+    payloads[payloads.length -1].buttonConfig = payloadButtons
     return _chainPromiseWithArguments(_send, payloads, pauseFunc)
   }
 }
