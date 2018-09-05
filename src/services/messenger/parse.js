@@ -26,7 +26,9 @@ function format({ sender={}, message={}, postback={}, timestamp, referral }) {
 
   if (text && !isEcho) msg.text = text
 
-  if (attachments) {
+  if (message.sticker_id) msg.text = '*'
+
+  if (attachments && !message.sticker_id) {
     msg.attachments = filterAttachments(attachments)
       .map(a => ({ url: a.payload.url }))
   }
