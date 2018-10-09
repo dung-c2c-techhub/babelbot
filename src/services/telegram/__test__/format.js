@@ -10,6 +10,7 @@ test('should format a single text message', assert => {
   const expected = {
     chat_id: 'yonah_forst',
     text: 'Hello abi',
+    parse_mode:"HTML"
   }
   
   assert.plan(1)
@@ -27,6 +28,7 @@ test('should format a single text message and merges options', assert => {
   const expected = {
     chat_id: 'yonah_forst',
     text: 'Hello abi',
+    parse_mode:"HTML",
     foo: 'bar',
   }
   
