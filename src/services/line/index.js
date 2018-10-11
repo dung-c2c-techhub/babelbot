@@ -6,10 +6,10 @@ const makeRequest = require('./makeRequest')
 const flow = require('lodash.flow')
 
 module.exports = config => {
-	const sendFunc = flow(format, makeRequest(config)('/v2/bot/message/push'))
+    const sendFunc = flow(format, makeRequest(config)('/v2/bot/message/push'))
 
-	return {
-		parse: parse(config),
-		send: chunker(sendFunc)
-	}
+    return {
+        parse: parse(config),
+        send: chunker(sendFunc)
+    }
 }

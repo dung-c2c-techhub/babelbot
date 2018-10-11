@@ -5,10 +5,10 @@ const makeRequest = require('./makeRequest')
 const flow = require('lodash.flow')
 
 module.exports = config => {
-	const sendFunc = flow(format(config), makeRequest(config))
+    const sendFunc = flow(format(config), makeRequest(config))
 
-	return {
-		parse,
-		send: chunker(sendFunc)
-	}
+    return {
+        parse,
+        send: chunker(sendFunc)
+    }
 }
