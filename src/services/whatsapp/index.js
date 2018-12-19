@@ -6,7 +6,7 @@ const makeRequest = require('./makeRequest')
 const flow = require('lodash.flow')
 
 module.exports = config => {
-    const sendFunc = flow(format, makeRequest(config)('/send_message'))
+    const sendFunc = flow(format(config), makeRequest(config)('/Messages.json'))
 
     return {
         parse: parse,

@@ -7,24 +7,25 @@ module.exports = (message) => {
     return Promise.resolve(res)
 }
 
-function format({ event, timestamp, sender, message }) {
-    if (!message || !VALID_MESSAGE_TYPES.includes(message.type)) return []
-
+function format(message) {
+    //if (!message || !VALID_MESSAGE_TYPES.includes(message.type)) return []
+    let timestamp = new Date().getTime()
+    
     var msg = {
         timestamp,
         service_name: SERVICE_NAME,
-        service_user_id: sender.id
+        service_user_id: message.From
     }
 
-    if (message.type === 'text') {
-        if (message.text) msg.text = message.text
+    if (message.NumMedia === '0') {
+        if (message.Body) msg.text = message.Body
     }
 
-    if (message.type === 'picture') {
+    /*if (message.type === 'picture') {
         msg.attachments = [{
             url: message.media
         }]
-    }
-
+    }*/
+    console.log(msg)
     return [msg]
 }

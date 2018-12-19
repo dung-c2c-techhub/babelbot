@@ -1,13 +1,18 @@
 const fetch = require('../../lib/fetch')
-const baseUrl = 'https://chatapi.viber.com/pa'
+const qs = require('querystring')
 
-module.exports = ({ apiKey }) => path => body => {
-    return fetch(baseUrl + apiKey + path, {
-        body: JSON.stringify(body),
+const baseUrl = 'https://api.twilio.com'
+
+module.exports = ({ accountSid, authToken }) => path => body => {
+    const token = Buffer.from(`${accountSid}:${authToken}`).toString('base64')
+    const url = baseUrl + '/2010-04-01/Accounts/' + accountSid
+    console.log(body)
+    return fetch(url + path, {
+        body: qs.stringify(body),
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'X-Viber-Auth-Token': apiKey
-        }
+            Authorization: `Basic ${token}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
     })
 }
