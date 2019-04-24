@@ -2,14 +2,16 @@ const fetch = require('../../lib/fetch')
 const qs = require('querystring')
 const baseUrl = 'https://api.mitto.ch'
 
-module.exports = ({ pageAccessToken }) => path => body => {
-    var querystring = '?' + qs.stringify({ access_token: pageAccessToken })
-
-    return fetch(baseUrl + path + querystring, {
-        body: JSON.stringify(body),
+module.exports = ({ Username, API_key }) => path => body => {
+    
+    var body = qs.stringify({ key: API_key, message: text, from, to })
+    console.log(body)
+    
+    return fetch(baseUrl + path, {
+        body,
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data',
         },
     })
 }
