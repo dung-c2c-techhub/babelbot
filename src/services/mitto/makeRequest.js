@@ -5,10 +5,10 @@ const baseUrl = 'https://api.mitto.ch'
 module.exports = ({ API_key }) => path => ({ text, from , to }) => {
     
     let strike = { 
-        key: API_key, 
-        message: text,
-        from: parseInt(from),
-        to:parseInt(to)
+        "key": API_key, 
+        "message": text,
+        "from": from,
+        "to":to
     }
     console.log('makeRequest', strike)
     console.log('path',path)
@@ -17,7 +17,7 @@ module.exports = ({ API_key }) => path => ({ text, from , to }) => {
         body: strike,
         method: 'POST',
         headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',
         },
     })
 }
