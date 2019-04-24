@@ -1,8 +1,11 @@
-module.exports = ({ defaultMask } ) => ({ service_user_id, text }) => {
+module.exports = ( event ) => ( msg ) => {
     
-    console.log('defaultMask', defaultMask)
-    var [phone, mask = defaultMask] = service_user_id.split(':')
-    return {      
+    console.log('format - event', event)
+    console.log('format - msg', msg) 
+    var [phone, mask] = service_user_id.split(':')
+
+    return {    
+        text,  
         to: phone,        
         from: mask,        
     }

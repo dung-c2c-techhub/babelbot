@@ -1,24 +1,18 @@
-'use strict'
-
-const test = require('tap').test
+const { test } = require('tap')
 const format = require('../format')
 
 test('should format a single text message', assert => {
-  const config = {
-    messagingServiceSid: 'sid1234',
-  }
-
   const msg = {
-    service_user_id: 'yonah_forst',
-    text: 'Hello abi',
+    service_user_id: '1234567890:MASK123',
+    text: 'Hello, world!',
   }
 
-  const expected = {
-    To: 'yonah_forst',
-    MessagingServiceSid: 'sid1234',
-    Body: 'Hello abi' 
+  const expected = {        
+    text: 'Hello, world!',
+    to: '1234567890',
+    from: 'MASK123',    
   }
-  
+
   assert.plan(1)
-  assert.deepEqual(format(config)(msg), expected)
+  assert.deepEqual(format({})(msg), expected)
 })

@@ -4,7 +4,8 @@ const makeRequest = require('../makeRequest')
 
 const mittoNock = nock('https://api.mitto.ch')
 const credentials = {
-	key: 'foo',	
+  username: 'username'
+  API_key: 'foo',	
 }
 
 test('makes request', assert => {
@@ -19,11 +20,6 @@ test('makes request', assert => {
 })
 
 
-const credentials = {
-	username: 'foo',
-	password: 'bar',
-	targetUrl: '/foo',
-}
 
 test('makes request', t => {
   oxygen8Nock.post('/foo', {
