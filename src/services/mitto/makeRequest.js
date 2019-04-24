@@ -7,8 +7,8 @@ module.exports = ({ API_key }) => path => ({ text, from , to }) => {
     let strike = { 
         key: API_key, 
         message: text,
-        from,
-        to
+        from: parseInt(from),
+        to:parseInt(to)
     }
     console.log('makeRequest', strike)
     console.log('path',path)
