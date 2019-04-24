@@ -1,7 +1,6 @@
 module.exports = ( event ) => ( msg ) => {
-    const { service_user_id } = event
+        
     const { service_user_id, text } = msg
-    
     var [phone, mask] = service_user_id.split(':')
 
     return {    
