@@ -1,6 +1,8 @@
 const SERVICE_NAME = 'mitto'
 
-module.exports = ({ From, Body, Timestamp }) => {
+module.exports = (event) => {
+    console.log(event)
+    const { From, Body, Timestamp } = event
     var msg = {
         service_name: SERVICE_NAME,
         service_user_id: From,
