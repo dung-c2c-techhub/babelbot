@@ -5,7 +5,7 @@ module.exports = ( event ) => ( msg ) => {
 
     return {
         text,
-        to: phone,
+        to: `+${phone}`,
         from: mask,
     }
 }
