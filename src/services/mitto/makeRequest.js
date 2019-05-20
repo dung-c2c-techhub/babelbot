@@ -11,10 +11,6 @@ module.exports = ({ API_key }) => path => ({ text, from , to }) => {
         "to": to
     }
 
-    console.log('makeRequest', strike)
-    console.log('stringify', JSON.stringify(strike),)
-    console.log('path',path)
-    console.log('urk', baseUrl + path)
     return fetch(baseUrl + path, {
         method: 'POST',
         body: JSON.stringify(strike),

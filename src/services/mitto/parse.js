@@ -1,9 +1,6 @@
 const SERVICE_NAME = 'mitto'
 
 module.exports = (event) => {
-    
-    console.log('parse', event)
-    
     const { receiver, content } = event
     var msg = {
         service_name: SERVICE_NAME,
