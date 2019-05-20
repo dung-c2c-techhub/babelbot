@@ -2,8 +2,9 @@ const fetch = require('../../lib/fetch')
 const qs = require('querystring')
 const baseUrl = 'https://api.mitto.ch'
 
-module.exports = ({ API_key }) => path => ({ text, from , to }) => {
-    
+module.exports = ({ API_key }) => path => (event) => {
+    console.log('event ---------',event )
+    const { text, from , to } = event
     let strike = { 
         "key": API_key, 
         "message": text,
