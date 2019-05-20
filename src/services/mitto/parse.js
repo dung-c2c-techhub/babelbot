@@ -2,7 +2,7 @@ const SERVICE_NAME = 'mitto'
 
 module.exports = (event) => {
     const { receiver, content } = event
-    console.log('receiver parse------------>', receiver)
+    console.log('receiver parse------------>', event)
     var msg = {
         service_name: SERVICE_NAME,
         service_user_id: receiver,
