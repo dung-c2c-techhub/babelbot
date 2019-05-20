@@ -9,6 +9,7 @@ module.exports = (event) => {
         text: content,
         timestamp: Date.now(),
     }
+    console.log('receiver parse------------>', msg)
 
     return Promise.resolve([msg])
 }

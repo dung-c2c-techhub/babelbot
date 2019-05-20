@@ -6,7 +6,6 @@ const flow = require('lodash.flow')
 
 module.exports = config => {
     const sendFunc = flow(format(config), makeRequest(config)('/sms'))
-    console.log('parse------------>', parse)
     return {
         parse,
         send: chunker(sendFunc)

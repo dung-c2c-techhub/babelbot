@@ -10,7 +10,7 @@ module.exports = ({ API_key }) => path => ({ text, from , to }) => {
         "from": from,
         "to": to
     }
-
+console.log('-------strike---------',strike)
     return fetch(baseUrl + path, {
         method: 'POST',
         body: JSON.stringify(strike),
