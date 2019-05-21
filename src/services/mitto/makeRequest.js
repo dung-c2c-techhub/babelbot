@@ -3,14 +3,16 @@ const qs = require('querystring')
 const baseUrl = 'https://api.mitto.ch'
 
 module.exports = ({ API_key }) => path => ({ text, from , to }) => {    
+    
+    console.log('text before sending to the api', text)
     let strike = { 
         "key": API_key, 
         "message": text,
         "from": from,
         "to": to,
-        "type":"utf-8"
+        "type":"unicode"
     }
-
+    
     return fetch(baseUrl + path, {
         method: 'POST',
         body: JSON.stringify(strike),
