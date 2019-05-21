@@ -8,7 +8,7 @@ module.exports = ({ API_key }) => path => ({ text, from , to }) => {
         "message": text,
         "from": from,
         "to": to,
-        "type":'Unicode'
+        "type":"Unicode"
     }
 
     return fetch(baseUrl + path, {
