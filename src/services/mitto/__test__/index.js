@@ -2,27 +2,24 @@ const test = require('tap').test
 const proxyquire = require('proxyquire')
 
 const index = proxyquire('../index', {
-  './makeRequest': config => body => Promise.resolve({ body, config }),
+  './makeRequest': config => path => body => Promise.resolve({ path, body, config }),
   './parse': parsed => ({ parsed }),
   './format': config => formatted => ({ formatted }),
   '../../lib/chunker': func => payload => func(payload),
 })
 
 test('send', assert => {
-
-  var config = { 
-    bar: 'baz',
-  }
-
+  var config = { API_key: 'baz' }
   var msg = {
-    service_user_id: 'morty',
+    service_user_id: '111111111:3861111111',
     text: 'wubalubadubdub!',
   }
 
   var expected = {
     config,
+    path: '/sms',
     body: {
-      formatted: msg,
+      formatted: msg
     }
   }
 
@@ -32,7 +29,7 @@ test('send', assert => {
 
 test('parse', assert => {
   var msg = {
-    service_user_id: 'morty',
+    service_user_id: '111111111:3861111111',
     text: 'wubalubadubdub!',
   }
 

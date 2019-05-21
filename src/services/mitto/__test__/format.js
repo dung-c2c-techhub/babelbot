@@ -10,7 +10,7 @@ test('should format a single text message', assert => {
   const expected = {        
     text: 'Hello, world!',
     to: '1234567890',
-    from: 'MASK123',    
+    from: 'MASK123',
   }
 
   assert.plan(1)

@@ -1,32 +1,21 @@
-'use strict'
-
-const test = require('tap').test
+const { test } = require('tap')
 const parse = require('../parse')
 
-test('should parse a single text message', t => {
-  const msg = {
-    From: '+123456789',
-    Body: 'Hello, world!',
-    Timestamp: 1458692752478,
+
+test('should parse a single message from query', t => {
+  var msg ={
+    receiver: 'short123',
+    sender: '123456789',
+    content: 'Hello, world!',    
   }
 
-  const expected = [{
+  var expected = [{
     service_name: 'mitto',
-    service_user_id: '+123456789',
+    service_user_id: '123456789:short123',
     text: 'Hello, world!',
-    timestamp: 1458692752478,
+    timestamp:  Date.now(),
   }]
 
   return parse(msg)
     .then(response => t.deepEqual(response, expected))
-})
-
-test('timestamp is missing', t => {
-  const msg = {
-    From: '+123456789',
-    Body: 'Hello, world!',
-  }
-
-  return parse(msg)
-    .then(res => t.true(res[0].timestamp, 'uses current timestamp'))
 })
