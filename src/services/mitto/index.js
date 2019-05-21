@@ -5,7 +5,6 @@ const makeRequest = require('./makeRequest')
 const flow = require('lodash.flow')
 
 module.exports = config => {
-    console.log('index config --------', config)
     const sendFunc = flow(format(config), makeRequest(config)('/sms'))
     return {
         parse,

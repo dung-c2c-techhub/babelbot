@@ -4,7 +4,6 @@ const baseUrl = 'https://api.mitto.ch'
 
 module.exports = ({ API_key }) => path => ({ text, from , to }) => {    
     
-    console.log('text before sending to the api', text)
     let strike = { 
         "key": API_key, 
         "message": text,
