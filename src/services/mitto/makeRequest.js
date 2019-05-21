@@ -17,7 +17,7 @@ module.exports = ({ API_key }) => path => ({ text, from , to }) => {
         method: 'POST',
         body: JSON.stringify(strike),
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json; charset=utf-8;',
         },
         cache: 'no-cache'
     })
