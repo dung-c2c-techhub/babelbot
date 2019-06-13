@@ -1,6 +1,6 @@
 const SERVICE_NAME = 'whatsapp'
 
-module.exports = ({parseEvent}) => {
+module.exports = (parseEvent) => {
     console.log('parseEvent---->',parseEvent)
     const { from, timestamp, body } = parseEvent
     var msg = {
