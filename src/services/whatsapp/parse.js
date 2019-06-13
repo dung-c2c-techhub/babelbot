@@ -1,31 +1,12 @@
 const SERVICE_NAME = 'whatsapp'
-const VALID_MESSAGE_TYPES = ['text', 'picture']
 
-module.exports = (message) => {
-    var res = format(message)
-
-    return Promise.resolve(res)
-}
-
-function format(message) {
-    //if (!message || !VALID_MESSAGE_TYPES.includes(message.type)) return []
-    let timestamp = new Date().getTime()
-    
+module.exports = ({ From, Body, Timestamp }) => {
     var msg = {
-        timestamp,
         service_name: SERVICE_NAME,
-        service_user_id: message.From
+        service_user_id: From,
+        text: Body,
+        timestamp: Timestamp ? parseInt(Timestamp) : Date.now(),
     }
 
-    if (message.NumMedia === '0') {
-        if (message.Body) msg.text = message.Body
-    }
-
-    /*if (message.type === 'picture') {
-        msg.attachments = [{
-            url: message.media
-        }]
-    }*/
-    console.log(msg)
-    return [msg]
+    return Promise.resolve([msg])
 }
