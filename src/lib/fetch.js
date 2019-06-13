@@ -3,6 +3,7 @@ const fetch = require('node-fetch')
 const parse = res => {
     return res.text()
         .then(text => {
+            console.log('parse', text)
             try {
                 return JSON.parse(text)
             } catch (e) {
