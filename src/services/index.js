@@ -9,6 +9,7 @@ module.exports = {
     mitto: require('./mitto'),
     loopback: require('./loopback'),
     chatfire: require('./chatfire'),
+    viber: require('./viber'),
+    whatsapp: require('./whatsapp'),
     // wechat: require('./wechat'),
-    viber: require('./viber')
 }
