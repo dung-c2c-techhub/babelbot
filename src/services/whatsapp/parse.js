@@ -2,12 +2,12 @@ const SERVICE_NAME = 'whatsapp'
 
 module.exports = (parseEvent) => {
     console.log('parseEvent---->',parseEvent)
-    const { from, timestamp, body } = parseEvent
+    const { From, Body } = parseEvent
     var msg = {
         service_name: SERVICE_NAME,
-        service_user_id: from,
-        text: body,
-        timestamp: timestamp ? parseInt(timestamp) : Date.now(),
+        service_user_id: From,
+        text: Body,
+        timestamp: Date.now(),
     }
 
     return Promise.resolve([msg])

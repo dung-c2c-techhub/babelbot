@@ -1,9 +1,9 @@
 module.exports = (config) => ({ service_user_id, text }) => {
-    console.log('config---->', config)
-    const {from} = config
+    console.log('config---->', config);
+    const { from } = config;
     return {
-        from, 
-        to: service_user_id,
-        body: text,
+        From: from, 
+        To: service_user_id,
+        Body: text,
     }
 }
