@@ -12,7 +12,7 @@ module.exports = ({ accountSid, authToken }) => path => body => {
         method: 'POST',
         headers: {
             Authorization: `Basic ${token}`,
-            'Content-Type': 'application/xml',
+            'Content-Type': 'text/xml',
         },
     })
 }
