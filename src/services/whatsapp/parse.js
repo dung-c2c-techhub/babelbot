@@ -1,4 +1,5 @@
-const SERVICE_NAME = 'whatsapp'
+const SERVICE_NAME = 'whatsapp';
+const IMAGE_MIME_TYPES = ['image/gif', 'image/jpeg', 'image/png'];
 
 module.exports = ({ From, Body, MediaUrl0, MediaContentType0 }) => {
     const msg = {
@@ -7,7 +8,7 @@ module.exports = ({ From, Body, MediaUrl0, MediaContentType0 }) => {
         timestamp: Date.now(),
     };
 
-    if (MediaContentType0 && MediaContentType0.includes('image') && MediaUrl0) {
+    if (IMAGE_MIME_TYPES.includes(MediaContentType0) && MediaUrl0) {
         msg.attachments = [{ url: MediaUrl0 }];
     } else {
         msg.text = Body;
