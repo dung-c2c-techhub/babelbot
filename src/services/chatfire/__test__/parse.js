@@ -37,11 +37,6 @@ test('should parse a single picture message', t => {
     service_user_id: 'yonah_forst',
     attachments: [{
       url: 'http://someurl.com/image.png',
-      options: {
-        headers: {
-          'Authorization': `Bearer authToken1234`
-        }
-      }
     }],
     timestamp: 1439576628405
   }]

@@ -1,8 +1,8 @@
-module.exports = ({ bot_id }) => ({ text }) => {
+module.exports = ({ bot_id }) => ({ text, at }) => {
     return {
         isBot: true,
         userId: bot_id,
         body: text,
-        at: Date.now()
+        at: at || Date.now()
     }
 }
