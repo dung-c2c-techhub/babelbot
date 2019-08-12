@@ -1,10 +1,10 @@
 module.exports = ({ api_key, api_secret }) => ({ service_user_id, text }) => {
-  const [phone, mask] = service_user_id.split(':');
+  const [provider, phone] = service_user_id.split(':');
   
   return {
     text,
     to: phone,
-    from: mask,
+    from: provider,
     api_key,
     api_secret,
   };

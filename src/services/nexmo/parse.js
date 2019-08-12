@@ -1,22 +1,22 @@
 const SERVICE_NAME = 'nexmo';
-const VALID_MESSAGE_TYPES = ['text']
+const VALID_MESSAGE_TYPES = ['text'];
 
+module.exports = () => async (message) => {
+  if (!message.text || !VALID_MESSAGE_TYPES.includes(message.type)) return [];
 
-module.exports = () => async (asd, asd1) => {
-  console.log('LLEGA!!!!!!!!!!');
-  console.log(asd, asd1);
+  const msg = {
+    timestamp: message['message-timestamp']
+      ? new Date(message['message-timestamp']).getTime()
+      : new Date(),
+    service_name: SERVICE_NAME,
+    service_user_id: `${message.msisdn}:${message.to}`,
+  };
 
-  // if (!message || !VALID_MESSAGE_TYPES.includes(message.type)) return [];
+  if (message.type === 'text' && message.text) {
+    msg.text = message.text;
+  }
 
-  // const msg = {
-  //   timestamp,
-  //   service_name: SERVICE_NAME,
-  //   service_user_id: sender.id
-  // };
+  console.log('MESSAGE', msg);
 
-  // if (message.type === 'text' && message.text) {
-  //   msg.text = message.text;
-  // }
-
-  return [];
+  return [msg];
 }
