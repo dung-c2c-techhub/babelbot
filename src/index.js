@@ -18,7 +18,6 @@ class BabelBot {
 
     send(serviceName, payload) {
         var service = services[serviceName]
-        console.log('xxxxxxxx', payload)
         if (!service) return Promise.reject('unknown service ' + serviceName)
 
         var config = this.getConfig(serviceName)
