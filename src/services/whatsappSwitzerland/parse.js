@@ -1,4 +1,4 @@
-const SERVICE_NAME = 'whatsapp';
+const SERVICE_NAME = 'whatsappSwitzerland';
 const IMAGE_MIME_TYPES = ['image/gif', 'image/jpeg', 'image/png'];
 
 module.exports = ({ From, Body, MediaUrl0, MediaContentType0 }) => {
