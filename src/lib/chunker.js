@@ -86,7 +86,7 @@ function _chunk(message, size) {
     if (Array.isArray(message)) {
         return message.reduce((pre, cur) => pre.concat(_chunk(cur, size)), [])
     } else if (typeof message === 'string' && size > 0 && message.length > size) {
-        return makeParagraphs(message, size, ['.', ':', ','])
+        return makeParagraphs(message, size, ['\n', ','])
     } else {
         return [message]
     }

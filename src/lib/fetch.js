@@ -3,7 +3,6 @@ const fetch = require('node-fetch')
 const parse = res => {
     return res.text()
         .then(text => {
-            console.log('parse', text)
             try {
                 return JSON.parse(text)
             } catch (e) {
@@ -12,14 +11,18 @@ const parse = res => {
         })
 }
 
-module.exports = (url, options) => {
-    return fetch(url, options)
-        .then(res => {
+
+module.exports = async (url, options) => {
+    const result = await fetch(url, options)
+        .then(async (res) => {
+            let parsed;
             if (res.status === 200 || res.status === 201) {
-                return parse(res)
+                parsed = await parse(res);
             } else {
-                return parse(res)
+                parsed = await parse(res)
                     .then(res => { throw res })
             }
+            return parsed;
         })
+    return result;    
 }
