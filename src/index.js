@@ -1,31 +1,51 @@
-const services = require('./services')
+const services = require('./services');
 
 class BabelBot {
-    constructor(config) {
-        this.getConfig = service => config[service]
+  constructor(config) {
+    this.getConfig = service => config[service];
+  }
+
+  parse(serviceName, payload) {
+    const service = services[serviceName];
+    if (!service) {
+      return Promise.reject(`Unknown service ${serviceName}`);
     }
 
-    parse(serviceName, payload) {
-        
-        var service = services[serviceName]
-        if (!service) return Promise.reject('unknown service ' + serviceName)
-
-        var config = this.getConfig(serviceName)
-        if (!config && serviceName !== 'loopback') return Promise.reject('config missing for ' + serviceName)
-
-        return service(config).parse(payload)
+    const config = this.getConfig(serviceName)
+    if (!config && serviceName !== 'loopback') {
+      return Promise.reject(`Config missing for ${serviceName}`);
     }
 
-    send(serviceName, payload) {
-        var service = services[serviceName]
-        console.log('xxxxxxxx', payload)
-        if (!service) return Promise.reject('unknown service ' + serviceName)
+    return service(config).parse(payload);
+  }
 
-        var config = this.getConfig(serviceName)
-        if (!config && serviceName !== 'loopback') return Promise.reject('config missing for ' + serviceName)
-
-        return service(config).send(payload)
+  send(serviceName, payload) {
+    const service = services[serviceName]
+    if (!service) {
+      return Promise.reject(`Unknown service ${serviceName}`);
     }
+
+    const config = this.getConfig(serviceName)
+    if (!config && serviceName !== 'loopback') {
+      return Promise.reject(`Config missing for ${serviceName}`);
+    }
+
+    return service(config).send(payload);
+  }
+
+  verify(serviceName, payload) {
+    const service = services[serviceName];
+    if (!service) {
+      return Promise.reject(`Unknown service ${serviceName}`);
+    }
+
+    const config = this.getConfig(serviceName);
+    if (!config && serviceName !== 'loopback') {
+      return Promise.reject(`Config missing for ${serviceName}`);
+    }
+
+    return service(config).verify(payload);
+  }
 }
 
-module.exports = BabelBot
+module.exports = BabelBot;

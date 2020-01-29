@@ -12,5 +12,5 @@ module.exports = {
     viber: require('./viber'),
     whatsapp: require('./whatsapp'),
     nexmo: require('./nexmo'),
-    // wechat: require('./wechat'),
+    wechat: require('./wechat'),
 }

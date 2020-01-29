@@ -1,10 +1,5 @@
-'use strict'
+const verify = require('./verify');
 
-const sender = require('./sender')
-const receiver = require('./receiver')
-
-module.exports = {
-    sender,
-    receiver,
-    token: require('./token'),
-}
+module.exports = config => ({
+  verify: verify(config),
+});
