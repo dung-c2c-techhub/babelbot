@@ -11,6 +11,7 @@ module.exports = {
     chatfire: require('./chatfire'),
     viber: require('./viber'),
     whatsapp: require('./whatsapp'),
+    whatsappSwitzerland: require('./whatsappSwitzerland'),
     nexmo: require('./nexmo'),
     wechat: require('./wechat'),
 }
