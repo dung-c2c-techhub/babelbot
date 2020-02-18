@@ -4,8 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "tap \"**/__test__/\"",
-    "lint": "eslint --init"
+    "test": "tap \"**/__test__/\""
   },
   "author": "",
   "license": "ISC",
