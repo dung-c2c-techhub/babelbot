@@ -1,15 +1,15 @@
 
-const chunker = require('../../lib/chunker')
-const parse = require('./parse')
-const format = require('./format')
-const makeRequest = require('./makeRequest')
-const flow = require('lodash.flow')
+const flow = require('lodash.flow');
+const chunker = require('../../lib/chunker');
+const parse = require('./parse');
+const format = require('./format');
+const makeRequest = require('./makeRequest');
 
-module.exports = config => {
-    const sendFunc = flow(format(config), makeRequest(config)('/Messages.json'))
+module.exports = (config) => {
+  const sendFunc = flow(format(config), makeRequest(config)('/Messages.json'));
 
-    return {
-        parse: parse,
-        send: chunker(sendFunc, config)
-    }
-}
+  return {
+    parse,
+    send: chunker(sendFunc, config),
+  };
+};
