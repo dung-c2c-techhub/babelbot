@@ -1,24 +1,22 @@
-const fetch = require('../../lib/fetch')
-const qs = require('querystring')
-const baseUrl = 'https://api.mitto.ch'
+const fetch = require('../../lib/fetch');
 
-module.exports = ({ API_key }) => path => ({ text, from , to }) => {
+const baseUrl = 'https://rest.mittoapi.com';
 
-    let strike = { 
-        "key": API_key, 
-        "message": text,
-        "from": from,
-        "to": to,
-        "type":"unicode"
-    }
+module.exports = ({ apiKey }) => (path) => ({ text, from, to }) => {
+  const body = {
+    text,
+    from,
+    to,
+    type: 'Unicode',
+  };
 
-    return fetch(baseUrl + path, {
-        method: 'POST',
-        body: JSON.stringify(strike),
-        headers: {
-            'Content-Type': 'application/json; charset=utf-8;',
-        },
-        cache: 'no-cache'
-    })
-}
-
+  return fetch(baseUrl + path, {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8;',
+      'X-Mitto-API-Key': apiKey,
+    },
+    cache: 'no-cache',
+  });
+};
